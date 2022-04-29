@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    app:layoutDescription="@xml/activity_editor_scene">
+
+    <ImageButton
+        android:id="@+id/button_sidebar_slide"
+        android:layout_width="88dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border_sidetab_btns"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/linear_sidetab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linear_sidetab"
+        android:layout_width="88dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_sidetab"
+        app:layout_constraintBottom_toTopOf="@+id/tablayout_editor_btmctrl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_sidebar_slide"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sidebar_category"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/border_sidetab_btns"
+            android:drawableStart="@drawable/ic_baseline_category_24"
+            android:paddingHorizontal="12dp"
+            android:text="항목"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/editor_sidebar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/editor_sidebar"
+            android:layout_width="88dp"
+            android:layout_height="0dp"
+            android:background="#00000000"
+            android:paddingTop="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_sidebar_category" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout_editor_btmctrl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabMode="scrollable">
+
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <ScrollView
+        android:id="@+id/scrollview_levels"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tablayout_editor_btmctrl"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#777777"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_levels"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            />
+    </ScrollView>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

@@ -3,6 +3,7 @@ package com.penelope.seatforyou.utils;
 import java.util.Locale;
 
 public class TimeUtils {
+    public static final int VIBE_SHORT = 4; //ms
 
     public static String format(int openHour, int openMinute, int closeHour, int closeMinute) {
         return String.format(Locale.getDefault(), "%s - %s",

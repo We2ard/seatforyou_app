@@ -42,4 +42,10 @@ public class BitmapUtils {
         return BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
     }
 
+    // dp 단위를 픽셀단위로 변환
+    public static int dpToPx(Context context, float dp) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return Math.round((float) dp * density);
+    }
+
 }
