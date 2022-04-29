@@ -1,0 +1,27 @@
+buildscript {
+    ext {
+        // App dependencies
+        dagger_hilt_version = "2.38.1"
+        hilt_version = "2.38.1"
+        lifecycle_version = "2.4.1"
+        nav_version = '2.4.1'
+        fragment_version = "1.4.1"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.38.1'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+    }
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.1.2' apply false
+    id 'com.android.library' version '7.1.2' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.penelope.seatforyou.ui.main.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.penelope.seatforyou.ui.main.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_zzimFragment"
+            app:destination="@id/zzimFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/zzimFragment"
+        android:name="com.penelope.seatforyou.ui.main.zzim.ZzimFragment"
+        android:label="fragment_zzim"
+        tools:layout="@layout/fragment_zzim" >
+        <action
+            android:id="@+id/action_zzimFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.penelope.seatforyou.ui.main.calendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.penelope.seatforyou.ui.main.auth.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_findPasswordFragment"
+            app:destination="@id/findPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_inquireRegisterFragment"
+            app:destination="@id/inquireRegisterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.penelope.seatforyou.ui.main.auth.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/findPasswordFragment"
+        android:name="com.penelope.seatforyou.ui.main.auth.findpassword.FindPasswordFragment"
+        android:label="fragment_find_password"
+        tools:layout="@layout/fragment_find_password" />
+    <fragment
+        android:id="@+id/inquireRegisterFragment"
+        android:name="com.penelope.seatforyou.ui.main.auth.inquireregister.InquireRegisterFragment"
+        android:label="fragment_inquire_register"
+        tools:layout="@layout/fragment_inquire_register" />
+</navigation>

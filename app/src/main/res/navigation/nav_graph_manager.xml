@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_manger"
+    app:startDestination="@id/managerFragment">
+
+    <fragment
+        android:id="@+id/managerFragment"
+        android:name="com.penelope.seatforyou.ui.manager.manager.ManagerFragment"
+        android:label="fragment_manager"
+        tools:layout="@layout/fragment_manager" >
+        <action
+            android:id="@+id/action_managerFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_managerFragment_to_reservationFragment"
+            app:destination="@id/reservationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.penelope.seatforyou.ui.manager.shop.shop.ShopFragment"
+        android:label="fragment_shop"
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_openCloseFragment"
+            app:destination="@id/openCloseFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_shopFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reservationFragment"
+        android:name="com.penelope.seatforyou.ui.manager.reservation.ReservationFragment"
+        android:label="fragment_reservation"
+        tools:layout="@layout/fragment_reservation" />
+    <dialog
+        android:id="@+id/addressFragment"
+        android:name="com.penelope.seatforyou.ui.manager.shop.address.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" >
+        <argument
+            android:name="oldAddress"
+            app:argType="com.penelope.seatforyou.data.address.Address"
+            app:nullable="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/openCloseFragment"
+        android:name="com.penelope.seatforyou.ui.manager.shop.openclose.OpenCloseFragment"
+        android:label="OpenCloseFragment" >
+        <argument
+            android:name="open_hour"
+            app:argType="integer" />
+        <argument android:name="open_minute"
+            app:argType="integer" />
+        <argument
+            android:name="close_hour"
+            app:argType="integer" />
+        <argument
+            android:name="close_minute"
+            app:argType="integer" />
+    </dialog>
+    <dialog
+        android:id="@+id/categoryFragment"
+        android:name="com.penelope.seatforyou.ui.manager.shop.category.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <argument
+            android:name="categories"
+            app:argType="java.util.ArrayList"
+            app:nullable="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/menuFragment"
+        android:name="com.penelope.seatforyou.ui.manager.shop.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <argument
+            android:name="menus"
+            app:argType="java.util.HashMap"
+            app:nullable="true" />
+    </dialog>
+</navigation>
