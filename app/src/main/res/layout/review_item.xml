@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textViewReviewSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nexon_lv1_gothic_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="너무 맛있어요!!" />
+
+    <TextView
+        android:id="@+id/textViewReviewDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nexon_lv1_gothic_light"
+        tools:text="처음 와봤는데 고기가 입에서 살살 녹네요. 다음엔 다른 메뉴로 시켜서 먹어 볼게요."
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewReviewWriter"
+        app:layout_constraintStart_toStartOf="@+id/textViewReviewSummary"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewSummary" />
+
+    <TextView
+        android:id="@+id/textViewReviewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/nexon_lv1_gothic_light"
+        tools:text="2022-05-07"
+        app:layout_constraintEnd_toEndOf="@+id/textViewReviewDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewDetail" />
+
+    <TextView
+        android:id="@+id/textViewReviewWriter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/nexon_lv1_gothic_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewReviewSummary"
+        tools:text="대장금" />
+
+    <RatingBar
+        android:id="@+id/ratingBarReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:progressTint="#777"
+        android:rating="3"
+        android:scaleX="0.3"
+        android:scaleY="0.3"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewReviewSummary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewReviewSummary" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewDate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

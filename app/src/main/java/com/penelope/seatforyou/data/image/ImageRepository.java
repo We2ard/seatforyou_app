@@ -3,22 +3,17 @@ package com.penelope.seatforyou.data.image;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.penelope.seatforyou.utils.BaseRepository;
 
 import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
-public class ImageRepository {
+public class ImageRepository extends BaseRepository<Bitmap> {
 
     private static final int MEGABYTES = 1024 * 1024;
 
@@ -59,28 +54,5 @@ public class ImageRepository {
                 })
                 .addOnFailureListener(onFailureListener);
     }
-
-    public LiveData<Map<String, Bitmap>> getShopAlbum(List<String> uids) {
-
-        MutableLiveData<Map<String, Bitmap>> album = new MutableLiveData<>(new HashMap<>());
-
-        for (String uid : uids) {
-            getShopImage(uid,
-                    bitmap -> {
-                        if (bitmap != null) {
-                            Map<String, Bitmap> oldMap = album.getValue();
-                            assert oldMap != null;
-                            Map<String, Bitmap> map = new HashMap<>(oldMap);
-                            map.put(uid, bitmap);
-                            album.setValue(map);
-                        }
-                    },
-                    e -> {}
-            );
-        }
-
-        return album;
-    }
-
 
 }

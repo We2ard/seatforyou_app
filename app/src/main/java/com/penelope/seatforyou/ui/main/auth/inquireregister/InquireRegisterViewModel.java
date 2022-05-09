@@ -25,8 +25,15 @@ public class InquireRegisterViewModel extends ViewModel {
     }
 
 
+    public void onRegisterClick() {
+        event.setValue(new Event.NavigateToRegisterScreen());
+    }
+
+
     public static class Event {
 
+        public static class NavigateToRegisterScreen extends Event {
+        }
     }
 
 }

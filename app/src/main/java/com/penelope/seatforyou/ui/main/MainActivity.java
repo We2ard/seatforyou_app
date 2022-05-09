@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -19,6 +20,7 @@ import com.penelope.seatforyou.R;
 import com.penelope.seatforyou.data.user.UserRepository;
 import com.penelope.seatforyou.databinding.ActivityMainBinding;
 import com.penelope.seatforyou.ui.manager.ManagerActivity;
+import com.penelope.seatforyou.utils.AuthUtils;
 import com.penelope.seatforyou.utils.PrefUtils;
 import com.penelope.seatforyou.utils.ui.AuthListenerActivity;
 

@@ -163,7 +163,7 @@ public class ShopFragment extends Fragment {
                 viewModel.getOpenMinute().observe(getViewLifecycleOwner(), openMinute ->
                         viewModel.getCloseHour().observe(getViewLifecycleOwner(), closeHour ->
                                 viewModel.getCloseMinute().observe(getViewLifecycleOwner(), closeMinute -> {
-                                    String strOpenClose = TimeUtils.format(openHour, openMinute, closeHour, closeMinute);
+                                    String strOpenClose = TimeUtils.formatTime(openHour, openMinute, closeHour, closeMinute);
                                     binding.textViewOpenClose.setText(strOpenClose);
                                 }))));
 

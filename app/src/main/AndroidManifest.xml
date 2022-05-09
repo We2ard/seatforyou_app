@@ -5,45 +5,49 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:name=".SeatForYouApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SeatForYou">
+        android:theme="@style/Theme.SeatForYou"
+        android:usesCleartextTraffic="true">
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="zswi02dkah" />
 
         <activity
             android:name=".ui.manager.ManagerActivity"
             android:exported="false" />
 
+        <activity android:name=".ui.editor.EditorActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
-
-        <activity android:name=".ui.editor.EditorActivity">
-        </activity>
-
         <activity
             android:name=".ui.DebugMainActivity"
-            android:exported="true"
-            >
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

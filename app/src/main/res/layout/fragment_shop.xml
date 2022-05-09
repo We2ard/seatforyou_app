@@ -77,7 +77,7 @@
         android:layout_marginEnd="10dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_image"
-        app:layout_constraintDimensionRatio="8:5"
+        app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toStartOf="@+id/buttonShopName"
         app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="@+id/textViewShopName"

@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.main.auth.inquireregister.InquireRegisterFragment"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.main.auth.inquireregister.InquireRegisterFragment">
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nexon_lv1_gothic_bold"
+        android:text="회원가입 방법"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nexon_lv1_gothic_light"
+        android:lineSpacingMultiplier="1.4"
+        android:text="로그인 화면에서 회원가입 화면으로 이동하실 수 있습니다.
+\n- 모바일 앱: 로그인 화면 > 회원가입 > 이름·전화번호·비밀번호 입력"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#EEE"
+        android:fontFamily="@font/nexon_lv1_gothic_bold"
+        android:text="회원가입 바로가기"
+        android:textColor="#555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nexon_lv1_gothic_light"
+        android:lineSpacingMultiplier="1.4"
+        android:text="회원가입시 다음의 내용을 참고해 주세요.\n
+1. 개인정보 입력 방법
+\n- 표준 통신사 11자리 전화번호만 이용 가능합니다.
+\n2. 개인정보 처리방침
+\n- 모든 개인정보는 본 앱의 이용을 위해서만 활용됩니다."
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

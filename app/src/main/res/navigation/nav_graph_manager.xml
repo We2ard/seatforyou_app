@@ -39,7 +39,11 @@
         android:id="@+id/reservationFragment"
         android:name="com.penelope.seatforyou.ui.manager.reservation.ReservationFragment"
         android:label="fragment_reservation"
-        tools:layout="@layout/fragment_reservation" />
+        tools:layout="@layout/fragment_reservation" >
+        <action
+            android:id="@+id/action_reservationFragment_to_addEditReservationFragment"
+            app:destination="@id/addEditReservationFragment" />
+    </fragment>
     <dialog
         android:id="@+id/addressFragment"
         android:name="com.penelope.seatforyou.ui.manager.shop.address.AddressFragment"
@@ -86,4 +90,17 @@
             app:argType="java.util.HashMap"
             app:nullable="true" />
     </dialog>
+    <fragment
+        android:id="@+id/addEditReservationFragment"
+        android:name="com.penelope.seatforyou.ui.manager.addeditreservation.AddEditReservationFragment"
+        android:label="fragment_add_edit_reservation"
+        tools:layout="@layout/fragment_add_edit_reservation" >
+        <argument
+            android:name="reservation"
+            app:argType="com.penelope.seatforyou.data.reservation.Reservation"
+            app:nullable="true" />
+        <argument
+            android:name="shopId"
+            app:argType="string" />
+    </fragment>
 </navigation>

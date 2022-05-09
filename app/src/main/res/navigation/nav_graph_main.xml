@@ -9,25 +9,31 @@
         android:id="@+id/homeFragment"
         android:name="com.penelope.seatforyou.ui.main.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.penelope.seatforyou.ui.main.search.SearchFragment"
+        android:name="com.penelope.seatforyou.ui.main.search.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_zzimFragment"
             app:destination="@id/zzimFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_setDateTimeFragment"
+            app:destination="@id/setDateTimeFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_setFilterFragment"
+            app:destination="@id/setFilterFragment" />
     </fragment>
     <fragment
         android:id="@+id/zzimFragment"
         android:name="com.penelope.seatforyou.ui.main.zzim.ZzimFragment"
         android:label="fragment_zzim"
-        tools:layout="@layout/fragment_zzim" >
+        tools:layout="@layout/fragment_zzim">
         <action
             android:id="@+id/action_zzimFragment_to_calendarFragment"
             app:destination="@id/calendarFragment" />
@@ -36,7 +42,7 @@
         android:id="@+id/calendarFragment"
         android:name="com.penelope.seatforyou.ui.main.calendar.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" >
+        tools:layout="@layout/fragment_calendar">
         <action
             android:id="@+id/action_calendarFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -45,7 +51,7 @@
         android:id="@+id/loginFragment"
         android:name="com.penelope.seatforyou.ui.main.auth.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -70,5 +76,74 @@
         android:id="@+id/inquireRegisterFragment"
         android:name="com.penelope.seatforyou.ui.main.auth.inquireregister.InquireRegisterFragment"
         android:label="fragment_inquire_register"
-        tools:layout="@layout/fragment_inquire_register" />
+        tools:layout="@layout/fragment_inquire_register" >
+        <action
+            android:id="@+id/action_inquireRegisterFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.penelope.seatforyou.ui.main.detail.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="shop"
+            app:argType="com.penelope.seatforyou.data.shop.Shop" />
+        <action
+            android:id="@+id/action_detailFragment_to_reserveFragment"
+            app:destination="@id/reserveFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_detailFragment"
+        app:destination="@id/detailFragment" />
+    <fragment
+        android:id="@+id/reserveFragment"
+        tools:layout="@layout/fragment_reserve"
+        android:name="com.penelope.seatforyou.ui.main.reserve.ReserveFragment"
+        android:label="ReserveFragment" >
+        <argument
+            android:name="shop"
+            app:argType="com.penelope.seatforyou.data.shop.Shop" />
+    </fragment>
+    <fragment
+        android:id="@+id/filteredFragment"
+        android:name="com.penelope.seatforyou.ui.main.filtered.FilteredFragment"
+        android:label="fragment_filtered"
+        tools:layout="@layout/fragment_filtered" >
+        <argument
+            android:name="shops"
+            app:argType="java.util.ArrayList" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+    </fragment>
+    <action android:id="@+id/action_global_filteredFragment" app:destination="@id/filteredFragment" />
+    <fragment
+        android:id="@+id/setDateTimeFragment"
+        android:name="com.penelope.seatforyou.ui.main.search.setdatetime.SetDateTimeFragment"
+        android:label="fragment_set_date_time"
+        tools:layout="@layout/fragment_set_date_time" >
+        <argument
+            android:name="date_time"
+            app:argType="java.time.LocalDateTime"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/setFilterFragment"
+        android:name="com.penelope.seatforyou.ui.main.search.setfilter.SetFilterFragment"
+        android:label="fragment_set_filter"
+        tools:layout="@layout/fragment_set_filter" >
+        <argument
+            android:name="region"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="category"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

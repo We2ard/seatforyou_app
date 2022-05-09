@@ -40,13 +40,13 @@ public class OpenCloseFragment extends DialogFragment {
 
         viewModel.getOpenHour().observe(getViewLifecycleOwner(), openHour ->
                 viewModel.getOpenMinute().observe(getViewLifecycleOwner(), openMinute -> {
-                    String strOpen = String.format("OPEN : %s", TimeUtils.format(openHour, openMinute));
+                    String strOpen = String.format("OPEN : %s", TimeUtils.formatTime(openHour, openMinute));
                     binding.textViewOpenTime.setText(strOpen);
                 }));
 
         viewModel.getCloseHour().observe(getViewLifecycleOwner(), closeHour ->
                 viewModel.getCloseMinute().observe(getViewLifecycleOwner(), closeMinute -> {
-                    String strClose = String.format("CLOSE : %s", TimeUtils.format(closeHour, closeMinute));
+                    String strClose = String.format("CLOSE : %s", TimeUtils.formatTime(closeHour, closeMinute));
                     binding.textViewCloseTime.setText(strClose);
                 }));
 

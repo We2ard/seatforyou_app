@@ -67,4 +67,13 @@ dependencies {
     // Fragment
     implementation "androidx.fragment:fragment:$fragment_version"
 
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
+    // 네이버 지도 SDK
+    implementation 'com.naver.maps:map-sdk:3.15.0'
+
+    // Location service
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 }

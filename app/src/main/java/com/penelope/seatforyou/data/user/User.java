@@ -1,5 +1,8 @@
 package com.penelope.seatforyou.data.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private String uid;
@@ -8,6 +11,7 @@ public class User {
     private String password;
     private boolean isCustomer;
     private long created;
+    private List<String> dibs;
 
     public User() {
     }
@@ -19,6 +23,7 @@ public class User {
         this.password = password;
         this.isCustomer = isCustomer;
         this.created = System.currentTimeMillis();
+        this.dibs = new ArrayList<>();
     }
 
     public String getUid() {
@@ -45,6 +50,10 @@ public class User {
         return created;
     }
 
+    public List<String> getDibs() {
+        return dibs;
+    }
+
     public void setUid(String uid) {
         this.uid = uid;
     }
@@ -68,4 +77,9 @@ public class User {
     public void setCreated(long created) {
         this.created = created;
     }
+
+    public void setDibs(List<String> dibs) {
+        this.dibs = dibs;
+    }
+
 }

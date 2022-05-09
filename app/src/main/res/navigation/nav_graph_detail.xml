@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_detail"
+    app:startDestination="@id/overviewFragment">
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.penelope.seatforyou.ui.main.detail.overview.OverviewFragment"
+        android:label="fragment_overview"
+        tools:layout="@layout/fragment_overview" >
+        <action
+            android:id="@+id/action_overviewFragment_to_menuListFragment"
+            app:destination="@id/menuListFragment" />
+        <argument
+            android:name="shop"
+            app:argType="com.penelope.seatforyou.data.shop.Shop" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuListFragment"
+        android:name="com.penelope.seatforyou.ui.main.detail.menulist.MenuListFragment"
+        android:label="fragment_menu_list"
+        tools:layout="@layout/fragment_menu_list" >
+        <action
+            android:id="@+id/action_menuListFragment_to_pictureFragment"
+            app:destination="@id/pictureFragment" />
+        <argument
+            android:name="shop"
+            app:argType="com.penelope.seatforyou.data.shop.Shop" />
+    </fragment>
+    <fragment
+        android:id="@+id/pictureFragment"
+        android:name="com.penelope.seatforyou.ui.main.detail.picture.PictureFragment"
+        android:label="fragment_picture"
+        tools:layout="@layout/fragment_picture" >
+        <action
+            android:id="@+id/action_pictureFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+        <argument
+            android:name="shop"
+            app:argType="com.penelope.seatforyou.data.shop.Shop" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.penelope.seatforyou.ui.main.detail.review.ReviewFragment"
+        android:label="fragment_review"
+        tools:layout="@layout/fragment_review" >
+        <argument
+            android:name="shop"
+            app:argType="com.penelope.seatforyou.data.shop.Shop" />
+        <action
+            android:id="@+id/action_reviewFragment_to_addReviewFragment"
+            app:destination="@id/addReviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addReviewFragment"
+        android:name="com.penelope.seatforyou.ui.main.detail.addreview.AddReviewFragment"
+        android:label="fragment_add_review"
+        tools:layout="@layout/fragment_add_review" >
+        <argument
+            android:name="shop"
+            app:argType="com.penelope.seatforyou.data.shop.Shop" />
+    </fragment>
+</navigation>

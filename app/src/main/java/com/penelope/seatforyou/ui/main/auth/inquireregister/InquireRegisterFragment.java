@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.penelope.seatforyou.R;
 import com.penelope.seatforyou.databinding.FragmentInquireRegisterBinding;
@@ -31,8 +33,13 @@ public class InquireRegisterFragment extends Fragment {
         binding = FragmentInquireRegisterBinding.bind(view);
         viewModel = new ViewModelProvider(this).get(InquireRegisterViewModel.class);
 
-        viewModel.getEvent().observe(getViewLifecycleOwner(), event -> {
+        binding.buttonRegister.setOnClickListener(v -> viewModel.onRegisterClick());
 
+        viewModel.getEvent().observe(getViewLifecycleOwner(), event -> {
+            if (event instanceof InquireRegisterViewModel.Event.NavigateToRegisterScreen) {
+                NavDirections navDirections = InquireRegisterFragmentDirections.actionInquireRegisterFragmentToRegisterFragment();
+                Navigation.findNavController(requireView()).navigate(navDirections);
+            }
         });
     }
 
