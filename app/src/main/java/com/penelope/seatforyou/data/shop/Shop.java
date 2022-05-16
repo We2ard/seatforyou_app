@@ -1,6 +1,7 @@
 package com.penelope.seatforyou.data.shop;
 
 import com.penelope.seatforyou.data.address.Address;
+import com.penelope.seatforyou.data.editor.InteriorProject;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Shop implements Serializable {
     private int closeHour;
     private int closeMinute;
     private long created;
+    private InteriorProject layout; // 배치도
 
 
     public Shop() {
@@ -39,6 +41,7 @@ public class Shop implements Serializable {
         this.closeHour = closeHour;
         this.closeMinute = closeMinute;
         this.created = System.currentTimeMillis();
+        this.layout = new InteriorProject(uid);
     }
 
     public String getUid() {

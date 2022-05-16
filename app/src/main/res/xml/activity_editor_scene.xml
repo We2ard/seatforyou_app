@@ -26,6 +26,31 @@
             motion:layout_constraintBottom_toTopOf="@+id/linear_sidetab"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/canvas"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="@+id/tablayout_editor_btmctrl" />
+        <Constraint
+            motion:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/imageView5"
+            motion:layout_constraintEnd_toStartOf="@+id/button_sidebar_slide"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_editor_absoluteX="323dp" />
+        <Constraint
+            motion:layout_editor_absoluteY="66dp"
+            android:id="@+id/imageView6"
+            motion:layout_constraintEnd_toEndOf="parent" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/button"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/linear_sidetab"
+            motion:layout_constraintBottom_toTopOf="@+id/scrollview_levels"
+            motion:layout_editor_absoluteY="67dp" />
 
     </ConstraintSet>
 

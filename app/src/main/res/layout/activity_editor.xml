@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:id="@+id/editor_root"
     app:layoutDescription="@xml/activity_editor_scene">
+
 
     <ImageButton
         android:id="@+id/button_sidebar_slide"
@@ -13,7 +15,7 @@
         android:layout_height="65dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/border_sidetab_btns"
-        android:elevation="10dp"
+        android:elevation="3dp"
         app:layout_constraintBottom_toTopOf="@+id/linear_sidetab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,6 +27,7 @@
         android:layout_width="88dp"
         android:layout_height="0dp"
         android:background="@drawable/border_sidetab"
+        android:elevation="3dp"
         app:layout_constraintBottom_toTopOf="@+id/tablayout_editor_btmctrl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_sidebar_slide"
@@ -50,6 +53,7 @@
             android:layout_width="88dp"
             android:layout_height="0dp"
             android:background="#00000000"
+            android:backgroundTintMode="screen"
             android:paddingTop="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,12 +67,11 @@
         android:id="@+id/tablayout_editor_btmctrl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabMode="scrollable">
-
 
 
     </com.google.android.material.tabs.TabLayout>
@@ -77,18 +80,18 @@
         android:id="@+id/scrollview_levels"
         android:layout_width="0dp"
         android:layout_height="160dp"
+        android:background="#777777"
+        android:elevation="5dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/tablayout_editor_btmctrl"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#777777"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/ll_levels"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            />
+            android:orientation="vertical" />
     </ScrollView>
 
 

@@ -1,5 +1,8 @@
 package com.penelope.seatforyou.ui.editor.adapter;
 
+import android.app.LauncherActivity;
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.Context;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
@@ -10,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.penelope.seatforyou.R;
+import com.penelope.seatforyou.ui.editor.EditorActivity;
 import com.penelope.seatforyou.utils.TimeUtils;
 
 import java.util.List;
@@ -54,49 +59,23 @@ public class EditorSideTabAdapter extends RecyclerView.Adapter<EditorSideTabAdap
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.view_editor_sidebar, viewGroup, false);
 
-        return new ViewHolder(view);
+        // 아이템별 드래그앤 드랍 구현
+        ViewHolder viewHolder = new ViewHolder(view);
+        View shape = viewHolder.imageView;
+
+        viewHolder.itemView.setOnLongClickListener(v -> {
+            Toast.makeText(v.getContext(), "드래그 시작", Toast.LENGTH_SHORT).show();
+            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(shape);
+            ViewCompat.startDragAndDrop(shape, null, shadowBuilder, null, 0);
+            return true;
+        });
+        return viewHolder;
     }
 
     // viewholder 에 데이터 세팅
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
         viewHolder.setData(localDataSet.get(position));
-        RecyclerView sideBar = viewHolder.itemView.findViewById(R.id.editor_sidebar);
-
-        // 사이드바 리스너 부착
-        viewHolder.itemView.setOnTouchListener((v, event) -> {
-            int action = event.getAction();
-            float curX = event.getX();
-            float curY = event.getY();
-
-            Vibrator vibrator = (Vibrator) viewHolder.itemView.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-            switch (action) {
-                case MotionEvent.ACTION_DOWN:   // 화면에 손가락을 눌렀을 시점의 동작
-                    vibrator.vibrate(TimeUtils.VIBE_SHORT);
-                    Toast.makeText(v.getContext(), position + "번 요소", Toast.LENGTH_SHORT).show();
-                    break;
-                case MotionEvent.ACTION_UP: // TODO:손가락을 땔 때 - 물체객체를 생성하고 배치해야함
-                    // 드래그 할 때 위아래로 조금만 움직여도 손가락 때는 동작을 감지 못함
-                    if(curX < 0){
-                        Toast.makeText(v.getContext(), position + "번 요소 배치", Toast.LENGTH_SHORT).show();
-                        vibrator.vibrate(TimeUtils.VIBE_SHORT);
-                    }
-                    break;
-//                case MotionEvent.ACTION_MOVE:
-//                    if(!v.isPressed()){
-//                        Toast.makeText(v.getContext(), position + "번 요소 배치", Toast.LENGTH_SHORT).show();
-//                        vibrator.vibrate(CommonUtil.VIBE_SHORT);
-//                    }
-                default:
-                    v.performClick();
-                    break;
-            }
-            return true;
-        });
-
-
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)

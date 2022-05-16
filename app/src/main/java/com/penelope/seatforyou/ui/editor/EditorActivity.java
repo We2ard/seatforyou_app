@@ -2,6 +2,7 @@ package com.penelope.seatforyou.ui.editor;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
@@ -15,16 +16,25 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.penelope.seatforyou.R;
+import com.penelope.seatforyou.data.editor.InteriorLevel;
+import com.penelope.seatforyou.data.editor.InteriorProject;
+import com.penelope.seatforyou.data.shop.Shop;
+import com.penelope.seatforyou.data.user.User;
+import com.penelope.seatforyou.databinding.ActivityEditorBinding;
 import com.penelope.seatforyou.ui.editor.adapter.EditorSideTabAdapter;
 import com.penelope.seatforyou.ui.editor.adapter.SideTabData;
+import com.penelope.seatforyou.ui.editor.draw.CanvasView;
 import com.penelope.seatforyou.utils.TimeUtils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,27 +44,59 @@ import java.util.List;
  */
 public class EditorActivity extends AppCompatActivity {
 
+    public static RecyclerView sideTab;
+    public static Context context;
     private LinearLayout levelList;
     private ScrollView levelScrollView;
-    List<String> tabItems = new ArrayList<>();
+    private ActivityEditorBinding binding;
+    private List<String> tabItems = new ArrayList<>();
+    private InteriorProject project;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editor);
+        binding = ActivityEditorBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initLayout();
     }
 
     private void initLayout() {
         levelScrollView = findViewById(R.id.scrollview_levels);
         levelList = findViewById(R.id.ll_levels);
+        context = this.getApplicationContext();
+        loadProject();
         initSideBar();
         initBottomTab();
     }
 
+    // 데이터 클래스로부터 정보를 가져오는 메소드
+    private void loadProject() {
+        // TODO: db에 접속해서 현재 사용자의 식별자와 프로젝트의 식별자를 비교해서 데이터를 가져옴
+        // 아래는 테스트용 ui
+        project = new InteriorProject("somethinguid");
+        // 객체에서 현재 보여줄 뷰를 반환
+        CanvasView view = project.getCurrentLevel().getCanvasView();
+
+        // 받은 뷰를 화면에 출력
+        binding.getRoot().addView(view);
+        // 뷰에 제약조건 추가
+        ConstraintSet set = new ConstraintSet();
+        set.clone(binding.getRoot());
+        set.connect(view.getId(), ConstraintSet.START, binding.getRoot().getId(), ConstraintSet.START,0);
+        set.connect(view.getId(), ConstraintSet.END, binding.getRoot().getId(), ConstraintSet.END,0);
+        set.connect(view.getId(), ConstraintSet.TOP, binding.getRoot().getId(), ConstraintSet.TOP,0);
+        set.connect(view.getId(), ConstraintSet.BOTTOM, binding.getRoot().getId(), ConstraintSet.BOTTOM,0);
+        set.applyTo(binding.getRoot());
+    }
+
+    private void addCanvasView() {
+        // data class에 반영함
+
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private void initSideBar() {
-        RecyclerView sideTab = findViewById(R.id.editor_sidebar);
+        sideTab = findViewById(R.id.editor_sidebar);
         sideTab.setLayoutManager(new LinearLayoutManager(this));
 
         // TODO : 기본 도형정보는 열거형으로 관리할것
@@ -111,15 +153,20 @@ public class EditorActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("저장").setIcon(R.drawable.ic_baseline_save_24));
         tabLayout.addTab(tabLayout.newTab().setText("계층").setIcon(R.drawable.ic_baseline_stairs_24));
 
-        // 테스트용 데이터 10개개
-       // TODO: 현재 프로젝트의 계층현황을 얻어와서 화면에 반영해야함
-        for (int i = 0; i < 10; i++) {
+        ArrayList<InteriorLevel> levels = project.getLevels();
+
+        for(InteriorLevel level : levels){
             View levelView = getLayoutInflater().inflate(R.layout.view_editor_levels, levelList, false);
             TextView level_name = levelView.findViewById(R.id.tv_levelname);
             TextView area = levelView.findViewById(R.id.tv_area);
-            level_name.setText("테스트 - " + i + "층");
-            area.setText(i * i + "m^2");
+            level_name.setText(level.getLevelName());
+            area.setText(level.getArea() + " m^2");
             levelView.setOnClickListener(v -> {
+                // 현재층은 다시 눌러도 별다른 동작이 없음
+                if(!(project.getCurrentLevel().getLevelId() == level.getLevelId())){
+                    project.setCurrentLevel(level.getLevelId());
+                }
+
                 Toast.makeText(this, level_name.getText(), Toast.LENGTH_SHORT).show();
             });
             levelList.addView(levelView);
@@ -164,7 +211,8 @@ public class EditorActivity extends AppCompatActivity {
                         saveProject();
                         break;
                     case 4: // 계층
-                        levelScrollView.setVisibility(View.GONE);
+                        if(levelScrollView.getVisibility() == View.VISIBLE)
+                            levelScrollView.setVisibility(View.GONE);
                         break;
                 }
             }
