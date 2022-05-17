@@ -6,6 +6,7 @@ package com.penelope.seatforyou.ui.editor.adapter;
 public class SideTabData {
     int imageId;    // 이미지 id
     String text;    // 이미지 이름
+    boolean selected = false;
 
     public SideTabData(int imageId, String text) {
         this.imageId = imageId;

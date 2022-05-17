@@ -1,9 +1,12 @@
 package com.penelope.seatforyou.ui.editor.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.LauncherActivity;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,28 +30,34 @@ import java.util.List;
  */
 public class EditorSideTabAdapter extends RecyclerView.Adapter<EditorSideTabAdapter.ViewHolder> {
 
-    private List<SideTabData> localDataSet;
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private boolean selected;
         private final TextView textView;
         private final ImageView imageView;
 
         public ViewHolder(View view) {
             super(view);
-
             textView = (TextView) view.findViewById(R.id.tv_sidetab_element);
             imageView = (ImageView) view.findViewById(R.id.iv_sidetab_element);
+
         }
 
         public void setData(SideTabData data) {
             textView.setText(data.text);
             imageView.setImageResource(data.imageId);
+            selected = data.selected;
         }
-
     }
 
-    public EditorSideTabAdapter(List<SideTabData> dataSet) {
+    private List<SideTabData> localDataSet;
+    private Drawable defaultSkin;
+    private Drawable selectedSkin;
+    private int previousPos = -1;
+
+    public EditorSideTabAdapter(List<SideTabData> dataSet, Drawable defaultSkin, Drawable selectedSkin) {
         localDataSet = dataSet;
+        this.defaultSkin = defaultSkin;
+        this.selectedSkin = selectedSkin;
     }
 
     // Create new views (invoked by the layout manager)
@@ -74,8 +83,21 @@ public class EditorSideTabAdapter extends RecyclerView.Adapter<EditorSideTabAdap
 
     // viewholder 에 데이터 세팅
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.setData(localDataSet.get(position));
+    public void onBindViewHolder(ViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
+        SideTabData curData = localDataSet.get(position);
+        viewHolder.setData(curData);
+        View itemView = viewHolder.itemView;
+        itemView.setBackground(curData.selected ? selectedSkin : defaultSkin);
+
+        itemView.setOnClickListener(v -> {
+            for(int i = 0; i< localDataSet.size(); i++){
+                if(i != position)
+                    localDataSet.get(i).selected = false;
+            }
+            localDataSet.get(position).selected = !localDataSet.get(position).selected;
+            notifyDataSetChanged();
+            // 이후 토글 정보이용해서 도형 뽑아내면 됨
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -83,4 +105,10 @@ public class EditorSideTabAdapter extends RecyclerView.Adapter<EditorSideTabAdap
     public int getItemCount() {
         return localDataSet.size();
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 }
+

@@ -13,6 +13,8 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,12 +36,11 @@ public class CanvasView extends View {
     // 배치할 도형
     private ArrayList<AssetData> assetList = new ArrayList<>();
 
-    private Paint paint;
+    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Canvas canvas;
 
     public CanvasView(Context context) {
         super(context);
-        Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(12);
         paint.setColor(Color.BLACK);
@@ -59,41 +60,38 @@ public class CanvasView extends View {
     // 뷰 초기 세팅
     private void init() {
         setId(View.generateViewId());
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(10);
 
-        this.setOnDragListener(new DragListener() {
-            @Override
-            public boolean onDrag(View v, DragEvent event) {
-                float dropX = event.getX();
-                float dropY = event.getY();
-                switch (event.getAction()) {
-                    case DragEvent.ACTION_DRAG_ENTERED:
-                        Toast.makeText(v.getContext(), "물체가 들어옴", Toast.LENGTH_SHORT).show();
-                        CanvasView.this.setBackgroundColor(GREEN);
-                        break;
-                    case DragEvent.ACTION_DRAG_EXITED:
-                        Toast.makeText(v.getContext(), "물체가 나감", Toast.LENGTH_SHORT).show();
-                        break;
-                    case DragEvent.ACTION_DRAG_ENDED:
-                        CanvasView.this.setBackgroundColor(WHITE);
-                        break;
-                    case DragEvent.ACTION_DROP:
-                        Toast.makeText(v.getContext(), "x : " + dropX + " y : " + dropY, Toast.LENGTH_SHORT).show();
-                        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_crop_square_24, null);
-                        assert drawable != null;
-                        drawable.setBounds((int) event.getX(), (int) event.getY(), drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-                        drawable.draw(canvas);
-//                        invalidate();
-                        break;
-                    default:
-                        break;
-                }
-                return true;
-            }
-        });
+
+//        this.setOnDragListener(new DragListener() {
+//            @Override
+//            public boolean onDrag(View v, DragEvent event) {
+//                float dropX = event.getX();
+//                float dropY = event.getY();
+//                switch (event.getAction()) {
+//                    case DragEvent.ACTION_DRAG_ENTERED:
+//                        Toast.makeText(v.getContext(), "물체가 들어옴", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case DragEvent.ACTION_DRAG_EXITED:
+//                        Toast.makeText(v.getContext(), "물체가 나감", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case DragEvent.ACTION_DRAG_ENDED:
+//                        CanvasView.this.setBackgroundColor(WHITE);
+//                        break;
+//                    case DragEvent.ACTION_DROP:
+//                        Toast.makeText(v.getContext(), "x : " + dropX + " y : " + dropY, Toast.LENGTH_SHORT).show();
+//                        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_crop_square_24, null);
+//                        assert drawable != null;
+//                        drawable.setBounds((int) event.getX(), (int) event.getY(), drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+//                        drawable.draw(canvas);
+////                        invalidate();
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
     }
+
+
 }

@@ -16,6 +16,7 @@ public class PolygonFactory {
 
     // TODO
     public Polygon makePolygon(Point point,int numOfVertex){
-        return new Polygon();
+//        return new Polygon();
+        return null;
     }
 }

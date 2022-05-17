@@ -82,10 +82,10 @@ public class EditorActivity extends AppCompatActivity {
         // 뷰에 제약조건 추가
         ConstraintSet set = new ConstraintSet();
         set.clone(binding.getRoot());
-        set.connect(view.getId(), ConstraintSet.START, binding.getRoot().getId(), ConstraintSet.START,0);
-        set.connect(view.getId(), ConstraintSet.END, binding.getRoot().getId(), ConstraintSet.END,0);
-        set.connect(view.getId(), ConstraintSet.TOP, binding.getRoot().getId(), ConstraintSet.TOP,0);
-        set.connect(view.getId(), ConstraintSet.BOTTOM, binding.getRoot().getId(), ConstraintSet.BOTTOM,0);
+        set.connect(view.getId(), ConstraintSet.START, binding.getRoot().getId(), ConstraintSet.START, 0);
+        set.connect(view.getId(), ConstraintSet.END, binding.getRoot().getId(), ConstraintSet.END, 0);
+        set.connect(view.getId(), ConstraintSet.TOP, binding.getRoot().getId(), ConstraintSet.TOP, 0);
+        set.connect(view.getId(), ConstraintSet.BOTTOM, binding.getRoot().getId(), ConstraintSet.BOTTOM, 0);
         set.applyTo(binding.getRoot());
     }
 
@@ -96,6 +96,7 @@ public class EditorActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void initSideBar() {
+        // TODO : 2차원 배열로 항목별 도형리스트를 관리할 것
         sideTab = findViewById(R.id.editor_sidebar);
         sideTab.setLayoutManager(new LinearLayoutManager(this));
 
@@ -106,10 +107,9 @@ public class EditorActivity extends AppCompatActivity {
             dataList.add(new SideTabData(R.drawable.ic_baseline_crop_square_24, "사각형"));
         }
 
-        // 리사이클러 뷰 어댑터 장착 및 아이템별 구분선 표시설정
-        RecyclerView.ItemDecoration decoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-        sideTab.setAdapter(new EditorSideTabAdapter(dataList));
-        sideTab.addItemDecoration(decoration);
+        // 리스너에 어댑터 부착
+        EditorSideTabAdapter adapter = new EditorSideTabAdapter(dataList, getDrawable(R.drawable.border_sidetab), getDrawable(R.drawable.border_sidetab_picked));
+        sideTab.setAdapter(adapter);
 
         // 사이드탭 토글버튼 초기화
         ImageButton btn_slide = findViewById(R.id.button_sidebar_slide);
@@ -137,7 +137,7 @@ public class EditorActivity extends AppCompatActivity {
             int action = event.getAction();
 
             if (action == MotionEvent.ACTION_DOWN) {
-                // TODO : 물체 카테고리 리스트 열려야됨
+                // TODO : 물체 카테고리 리스트 열려야됨 클릭하면 리스트에 값 새로 채워넣음
                 Toast.makeText(this, "항목버튼", Toast.LENGTH_SHORT).show();
                 return true;
             } else return false;
@@ -155,7 +155,7 @@ public class EditorActivity extends AppCompatActivity {
 
         ArrayList<InteriorLevel> levels = project.getLevels();
 
-        for(InteriorLevel level : levels){
+        for (InteriorLevel level : levels) {
             View levelView = getLayoutInflater().inflate(R.layout.view_editor_levels, levelList, false);
             TextView level_name = levelView.findViewById(R.id.tv_levelname);
             TextView area = levelView.findViewById(R.id.tv_area);
@@ -163,7 +163,7 @@ public class EditorActivity extends AppCompatActivity {
             area.setText(level.getArea() + " m^2");
             levelView.setOnClickListener(v -> {
                 // 현재층은 다시 눌러도 별다른 동작이 없음
-                if(!(project.getCurrentLevel().getLevelId() == level.getLevelId())){
+                if (!(project.getCurrentLevel().getLevelId() == level.getLevelId())) {
                     project.setCurrentLevel(level.getLevelId());
                 }
 
@@ -211,7 +211,7 @@ public class EditorActivity extends AppCompatActivity {
                         saveProject();
                         break;
                     case 4: // 계층
-                        if(levelScrollView.getVisibility() == View.VISIBLE)
+                        if (levelScrollView.getVisibility() == View.VISIBLE)
                             levelScrollView.setVisibility(View.GONE);
                         break;
                 }
