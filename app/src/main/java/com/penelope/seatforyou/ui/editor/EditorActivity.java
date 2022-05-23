@@ -5,11 +5,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +74,7 @@ public class EditorActivity extends AppCompatActivity {
     // 데이터 클래스로부터 정보를 가져오는 메소드
     private void loadProject() {
         // TODO: db에 접속해서 현재 사용자의 식별자와 프로젝트의 식별자를 비교해서 데이터를 가져옴
-        // 아래는 테스트용 ui
+        // 아래는 테스트용 ui, 실제로는 db에서 InteriorProject를 가져와야 함
         project = new InteriorProject("somethinguid");
         // 객체에서 현재 보여줄 뷰를 반환
         CanvasView view = project.getCurrentLevel().getCanvasView();
@@ -103,8 +105,12 @@ public class EditorActivity extends AppCompatActivity {
         // TODO : 기본 도형정보는 열거형으로 관리할것
         // 리사이클러뷰에 데이터 입력
         List<SideTabData> dataList = new ArrayList<>();
+        List<SideTabData> dataList2 = new ArrayList<>();
+
         for (int i = 0; i < 15; i++) {
             dataList.add(new SideTabData(R.drawable.ic_baseline_crop_square_24, "사각형"));
+            if(i > 9)
+                dataList2.add(new SideTabData(R.drawable.ic_baseline_panorama_fish_eye_24_circle, "동그라미"));
         }
 
         // 리스너에 어댑터 부착
@@ -133,16 +139,27 @@ public class EditorActivity extends AppCompatActivity {
 
         // 항목버튼 초기화
         Button btn_category = findViewById(R.id.btn_sidebar_category);
-        btn_category.setOnTouchListener((v, event) -> {
-            int action = event.getAction();
+        btn_category.setOnClickListener(v -> {
+            // 팝업메뉴 설정
+            PopupMenu popup = new PopupMenu(EditorActivity.this, btn_category);
+            popup.getMenuInflater().inflate(R.menu.menu_editor_category, popup.getMenu());
 
-            if (action == MotionEvent.ACTION_DOWN) {
-                // TODO : 물체 카테고리 리스트 열려야됨 클릭하면 리스트에 값 새로 채워넣음
-                Toast.makeText(this, "항목버튼", Toast.LENGTH_SHORT).show();
+            popup.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()){
+                    case R.id.category_menu1:
+                        adapter.setLocalDataSet(dataList);
+                        break;
+                    case R.id.category_menu2:
+                        adapter.setLocalDataSet(dataList2);
+                        break;
+                }
                 return true;
-            } else return false;
+            });
+            // 실제 실행코드
+            popup.show();
         });
     }
+
 
     private void initBottomTab() {
         TabLayout tabLayout = findViewById(R.id.tablayout_editor_btmctrl);

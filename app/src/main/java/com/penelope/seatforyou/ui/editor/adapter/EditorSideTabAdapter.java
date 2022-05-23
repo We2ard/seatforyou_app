@@ -5,6 +5,7 @@ import android.app.LauncherActivity;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
@@ -49,15 +50,26 @@ public class EditorSideTabAdapter extends RecyclerView.Adapter<EditorSideTabAdap
         }
     }
 
-    private List<SideTabData> localDataSet;
+    private static List<SideTabData> localDataSet;
     private Drawable defaultSkin;
     private Drawable selectedSkin;
-    private int previousPos = -1;
 
     public EditorSideTabAdapter(List<SideTabData> dataSet, Drawable defaultSkin, Drawable selectedSkin) {
         localDataSet = dataSet;
         this.defaultSkin = defaultSkin;
         this.selectedSkin = selectedSkin;
+    }
+
+    public void setLocalDataSet(List<SideTabData> localDataSet) {
+        for (SideTabData data : localDataSet){
+            data.selected = false;
+        }
+        EditorSideTabAdapter.localDataSet = localDataSet;
+        notifyDataSetChanged();
+    }
+
+    public static List<SideTabData> getLocalDataSet() {
+        return localDataSet;
     }
 
     // Create new views (invoked by the layout manager)
@@ -68,20 +80,11 @@ public class EditorSideTabAdapter extends RecyclerView.Adapter<EditorSideTabAdap
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.view_editor_sidebar, viewGroup, false);
 
-        // 아이템별 드래그앤 드랍 구현
-        ViewHolder viewHolder = new ViewHolder(view);
-        View shape = viewHolder.imageView;
-
-        viewHolder.itemView.setOnLongClickListener(v -> {
-            Toast.makeText(v.getContext(), "드래그 시작", Toast.LENGTH_SHORT).show();
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(shape);
-            ViewCompat.startDragAndDrop(shape, null, shadowBuilder, null, 0);
-            return true;
-        });
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     // viewholder 에 데이터 세팅
+    // 사이드 탭에서 도형은 한개만 선택이 가능하며 선택된 도형을 다시 터치하면 선택이 해제된다.
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
         SideTabData curData = localDataSet.get(position);
@@ -96,7 +99,8 @@ public class EditorSideTabAdapter extends RecyclerView.Adapter<EditorSideTabAdap
             }
             localDataSet.get(position).selected = !localDataSet.get(position).selected;
             notifyDataSetChanged();
-            // 이후 토글 정보이용해서 도형 뽑아내면 됨
+            // 어떤 항목에서 몇번 도형이 선택되었는지 canvasView 로 데이터를 전송
+
         });
     }
 

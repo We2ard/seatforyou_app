@@ -1,25 +1,21 @@
 package com.penelope.seatforyou.data.editor.assets;
 
-import android.graphics.Point;
 import android.graphics.PointF;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * 임의 개수의 꼭지점을 가진 다각형을 표현하는 클래스
  * 생성위치(중심점)과 다각형을 이루는 꼭지점들의 리스트를 받아서 생성됨
  */
-public class Polygon {
+public class Polygon extends Figure{
 
     private List<PointF> points = new ArrayList<>();
-    private PointF centerOfGravity;
-    private double rotationAngle = 0;
+    protected double rotationAngle = 0;
 
-    public Polygon(PointF spawnPoint, List<PointF> points) {
-        this.centerOfGravity = spawnPoint;
-        this.points = points;
+    public Polygon(PointF spawnPoint) {
+        super(spawnPoint);
     }
 
     public double getRotationAngle() {
@@ -41,5 +37,21 @@ public class Polygon {
             total -= (subX * subY * 0.5);
         }
         return Math.abs(total);
+    }
+
+    public List<PointF> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<PointF> points) {
+        this.points = points;
+    }
+
+    public PointF getSpawnPoint() {
+        return spawnPoint;
+    }
+
+    public void setSpawnPoint(PointF spawnPoint) {
+        this.spawnPoint = spawnPoint;
     }
 }

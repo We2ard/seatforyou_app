@@ -1,18 +1,23 @@
 package com.penelope.seatforyou.data.editor.assets;
 
-public class Circle implements AssetData{
-    @Override
-    public void crate() {
+import android.graphics.PointF;
 
+public class Circle extends Figure{
+
+    private float radius;
+
+    public Circle(PointF spawnPoint, float radius) {
+        super(spawnPoint);
+        this.radius = radius;
     }
 
-    @Override
-    public void delete() {
-
+    public float getRadius() {
+        return radius;
     }
 
-    @Override
-    public void move(float x, float y, int listIndex) {
-
+    public void setRadius(float radius) {
+        this.radius = radius;
     }
+
+
 }
